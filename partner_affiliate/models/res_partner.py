@@ -22,3 +22,12 @@ class ResPartner(models.Model):
         string="Affiliates",
         domain=[("active", "=", True), ("is_company", "=", True)],
     )
+
+    def action_view_opportunity(self):
+        """Add opportunities of affiliates"""
+        action = super().action_view_opportunity()
+        all_partners = self.with_context(active_test=False).search([('id', 'child_of', self.ids)])
+        all_partners.read(['parent_id'])
+        if self.affiliate_ids:
+            action['domain'] = [('partner_id', 'in', all_partners.ids)]
+        return action

@@ -15,7 +15,7 @@
     "category": "Customer Relationship Management",
     "license": "AGPL-3",
     "installable": True,
-    "depends": ["base"],
+    "depends": ["base", "crm"],
     "data": ["views/res_partner_view.xml"],
     "development_status": "Production/Stable",
 }
